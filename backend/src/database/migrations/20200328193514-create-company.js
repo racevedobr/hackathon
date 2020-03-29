@@ -1,6 +1,6 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('users', {
+    return queryInterface.createTable('companies', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -11,7 +11,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      cpf: {
+      cnpj: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true,
@@ -33,33 +33,27 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-
       number: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-
       district: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-
       city: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-
       uf: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-
       company: {
         type: Sequelize.BOOLEAN,
-        defaultValue: false,
+        defaultValue: true,
         allowNull: false,
       },
-
       password_hash: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -76,6 +70,6 @@ module.exports = {
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable('users');
+    return queryInterface.dropTable('companies');
   },
 };

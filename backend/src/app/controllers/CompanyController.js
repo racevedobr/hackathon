@@ -1,11 +1,11 @@
 import * as Yup from 'yup';
-import User from '../models/User';
+import Company from '../models/Company';
 
-class UserController {
+class CompanyController {
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
-      cpf: Yup.string().required(),
+      cnpj: Yup.string().required(),
       cellphone: Yup.string().required(),
       cep: Yup.string().required(),
       street: Yup.string().required(),
@@ -25,16 +25,17 @@ class UserController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    const userExists = await User.findOne({ where: { email: req.body.email } });
-    if (userExists) {
-      return res.status(400).json({ error: 'User already exists' });
+    const companyExists = await Company.findOne({
+      where: { email: req.body.email },
+    });
+    if (companyExists) {
+      return res.status(400).json({ error: 'Company already exists' });
     }
-    console.log(req.body);
 
     const {
       id,
       name,
-      cpf,
+      cnpj,
       cellphone,
       email,
       cep,
@@ -44,12 +45,12 @@ class UserController {
       city,
       uf,
       company,
-    } = await User.create(req.body);
+    } = await Company.create(req.body);
 
     return res.json({
       id,
       name,
-      cpf,
+      cnpj,
       cellphone,
       email,
       cep,
@@ -83,22 +84,22 @@ class UserController {
 
     const { email, oldPassword } = req.body;
 
-    const user = await User.findByPk(req.userId);
+    const company = await Company.findByPk(req.userId);
 
-    if (email && email !== user.email) {
-      const userExists = await User.findOne({
+    if (email && email !== company.email) {
+      const companyExists = await Company.findOne({
         where: { email },
       });
-      if (userExists) {
-        return res.status(400).json({ error: 'User already exists' });
+      if (companyExists) {
+        return res.status(400).json({ error: 'Company already exists' });
       }
     }
 
-    if (oldPassword && !(await user.checkPassword(oldPassword))) {
+    if (oldPassword && !(await company.checkPassword(oldPassword))) {
       return res.status(401).json({ error: 'Password does no match' });
     }
 
-    const { id, name, provider } = await user.update(req.body);
+    const { id, name, provider } = await company.update(req.body);
 
     return res.json({
       id,
@@ -109,4 +110,4 @@ class UserController {
   }
 }
 
-export default new UserController();
+export default new CompanyController();

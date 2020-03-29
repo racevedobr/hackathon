@@ -1,68 +1,76 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('users', {
+    return queryInterface.createTable('jobopps', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
-      name: {
+      company_id: {
+        type: Sequelize.INTEGER,
+        references: { model: 'companies', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
+        allowNull: false,
+      },
+      job_name: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      cpf: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      cellphone: {
+      techs: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      cep: {
+      type_position: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      street: {
+      time_work: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-
-      number: {
+      benefities: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-
-      district: {
+      salary: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-
-      city: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-
-      uf: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-
-      company: {
+      canceled: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
         allowNull: false,
       },
-
-      password_hash: {
-        type: Sequelize.STRING,
+      hired: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
         allowNull: false,
+      },
+      open_date: {
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
+      hired_date: {
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
+      closed_date: {
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
+      closed_reason: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      canceled_reason: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      canceled_at: {
+        type: Sequelize.DATE,
+        allowNull: true,
       },
       created_at: {
         type: Sequelize.DATE,
@@ -76,6 +84,6 @@ module.exports = {
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable('users');
+    return queryInterface.dropTable('jobopps');
   },
 };

@@ -1,0 +1,24 @@
+version: '3.4'
+services:
+    postgres:
+        image: postgres
+        container_name: helptohire-postgres
+        environment:
+            POSTGRES_PASSWORD: "docker"
+        ports:
+            - "5432:5432"
+    mongo:
+        image: mongo
+        container_name: helptohire-mongo
+        ports:
+            - "27017:27017"
+        depends_on:
+            - postgres
+    redis:
+        image: redis:alpine
+        container_name: helptohire-redis
+        ports:
+            - "6379:6379"
+        depends_on:
+            - postgres
+            - mongo
