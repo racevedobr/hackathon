@@ -4,6 +4,7 @@ class JobOpportunity extends Model {
   static init(sequelize) {
     super.init(
       {
+        company_id: Sequelize.INTEGER,
         job_name: Sequelize.STRING,
         techs: Sequelize.STRING,
         type_position: Sequelize.STRING,
@@ -21,6 +22,7 @@ class JobOpportunity extends Model {
       },
       {
         sequelize,
+        tableName: 'jobopps',
       }
     );
 
