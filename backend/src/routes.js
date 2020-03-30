@@ -5,6 +5,7 @@ import CompanyController from './app/controllers/CompanyController';
 import JobOpportunityController from './app/controllers/JobOpportunityController';
 import SessionUserController from './app/controllers/SessionUserController';
 import SessionCompanyController from './app/controllers/SessionCompanyController';
+import ChatController from './app/controllers/ChatController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -23,5 +24,7 @@ routes.use(authMiddleware);
 routes.put('/users', UserController.update);
 
 routes.post('/job-opportunities', JobOpportunityController.store);
+
+routes.get('/chattoken', ChatController.post);
 
 export default routes;
