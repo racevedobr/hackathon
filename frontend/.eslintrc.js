@@ -35,4 +35,11 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'react/state-in-constructor': [2, 'never']
   },
+  settings: {
+    "import/resolver": {
+      "babel-plugin-root-import": {
+        rootPathSuffix: "src"
+      },
+    },
+  },
 };
